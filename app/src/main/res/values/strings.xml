@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">orm_presentation</string>
+    <string name="splashscreen_title">Contacts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contactsList">Contacts List</string>
+</resources>

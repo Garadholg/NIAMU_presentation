@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splashscreen_title_paddingtop">12dp</dimen>
+    <dimen name="splashscreen_title_fontsize">30sp</dimen>
+    <dimen name="recyclerviewitem_marginhorizontal">15dp</dimen>
+    <dimen name="recyclerviewitem_marginvertical">10dp</dimen>
+    <dimen name="recyclerviewitem_padding">10dp</dimen>
+    <dimen name="recyclerviewitem_fullname_fontsize">18sp</dimen>
+</resources>
