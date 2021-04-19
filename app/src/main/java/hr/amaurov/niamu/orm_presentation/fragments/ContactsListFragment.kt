@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import hr.amaurov.niamu.orm_presentation.HostActivity
 import hr.amaurov.niamu.orm_presentation.R
 import hr.amaurov.niamu.orm_presentation.models.Contact
 import hr.amaurov.niamu.orm_presentation.utils.ContactsAdapter
@@ -28,10 +29,13 @@ class ContactsListFragment : Fragment() {
 
         addContacts();
         rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
-        rvContacts.adapter = ContactsAdapter(contacts, this.requireContext())
+        rvContacts.adapter = ContactsAdapter(contacts, this.requireContext()) { item ->
+            (requireActivity() as HostActivity).navigateToProductDetail(item.firstName + " " + item.lastName)
+        };
     }
 
     private fun addContacts() {
+        contacts.clear()
         contacts.add(Contact(firstName = "Anton", lastName = "Maurovic"));
         contacts.add(Contact(firstName = "Luis Daniel", lastName = "Vasquez Pena"));
         contacts.add(Contact(firstName = "Andro", lastName = "Zonja"));

@@ -3,13 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ContactsListFragment">
+    tools:context=".fragments.ContactsListFragment"
+    android:orientation="vertical"
+    android:background="@color/primary">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/contactslist_button_margin"
+        android:paddingVertical="@dimen/contactslist_button_paddingvertical"
+        android:text="@string/contactslist_button_addcontact"
+        android:backgroundTint="@color/secondary"
+        android:textColor="@color/white"
+    />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContacts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/primary"
     />
 
 </LinearLayout>

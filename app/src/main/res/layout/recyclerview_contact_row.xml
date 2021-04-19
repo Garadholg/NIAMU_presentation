@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/recyclerviewitem_marginhorizontal"
     android:layout_marginVertical="@dimen/recyclerviewitem_marginvertical"
-    android:padding="@dimen/recyclerviewitem_padding"
+    app:cardCornerRadius="@dimen/recyclerviewitem_cardcornerradius"
+    android:elevation="10dp"
     android:gravity="center">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingHorizontal="@dimen/recyclerviewitem_paddinghorizontal"
+        android:paddingVertical="@dimen/recyclerviewitem_paddingvertical">
 
         <TextView
             android:id="@+id/tvFullName"
@@ -32,4 +36,4 @@
         android:visibility="invisible"
     />
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
