@@ -7,5 +7,3 @@ import android.content.Intent
 inline fun<reified T: Activity> Context.startActivity() = startActivity(Intent(this,T::class.java).apply {
     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // very important for the new versions of Android
 })
-
-fun Boolean.toInt() = if (this) 1 else 0
