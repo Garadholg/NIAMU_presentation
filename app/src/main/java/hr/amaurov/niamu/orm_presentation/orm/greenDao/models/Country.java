@@ -2,6 +2,7 @@ package hr.amaurov.niamu.orm_presentation.orm.greenDao.models;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(
     // Flag if the DAO should create the database table (default is true).
@@ -21,4 +22,30 @@ public class Country {
     private Long id;
 
     private String name;
+
+    @Generated(hash = 1662620089)
+    public Country(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Generated(hash = 668024697)
+    public Country() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
