@@ -1,5 +1,8 @@
 plugins {
+    // Order matters here.
+    // See: https://github.com/greenrobot/greenDAO/issues/395#issuecomment-324380675
     id 'com.android.application'
+    id 'org.greenrobot.greendao' // greenDAO
     id 'kotlin-android'
     id 'kotlin-android-extensions'
 }
@@ -18,6 +21,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Since greenDAO does not support entities written in Kotlin,
+    // we add the generated greenDAO files to the sourceSets
+    // See: https://github.com/greenrobot/greenDAO/issues/395#issuecomment-304582750
+    sourceSets {
+        main.java.srcDirs += 'build/generated/source/greendao'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,8 +43,11 @@ android {
     }
 }
 
-dependencies {
+greendao {
+    schemaVersion 1
+}
 
+dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -43,6 +56,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'org.greenrobot:greendao:3.3.0' // greenDAO
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
