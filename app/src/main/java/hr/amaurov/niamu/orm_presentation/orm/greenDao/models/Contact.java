@@ -3,6 +3,7 @@ package hr.amaurov.niamu.orm_presentation.orm.greenDao.models;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Unique;
 
 @Entity(
         // Flag if the DAO should create the database table (default is true).
@@ -27,7 +28,10 @@ public class Contact {
     // BUG: Cannot make it work with java.time.LocalDate (unsupported type error)
     private java.util.Date dateOfBirth;
 
+    @Unique
     private String email;
+
+    @Unique
     private String phoneNumber;
 
     private long cityId; // This defines our foreign key.
