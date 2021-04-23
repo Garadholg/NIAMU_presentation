@@ -5,43 +5,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import hr.amaurov.niamu.orm_presentation.HostActivity
 import hr.amaurov.niamu.orm_presentation.R
-import hr.amaurov.niamu.orm_presentation.models.Contact
+import hr.amaurov.niamu.orm_presentation.SplashScreenActivity
+import hr.amaurov.niamu.orm_presentation.application.ContactApplication
+import hr.amaurov.niamu.orm_presentation.databinding.FragmentContactDetailsBinding
+import hr.amaurov.niamu.orm_presentation.databinding.FragmentContactsListBinding
+import hr.amaurov.niamu.orm_presentation.orm.room.entities.ContactRoom
+import hr.amaurov.niamu.orm_presentation.orm.room.viewModels.ContactViewModel
+import hr.amaurov.niamu.orm_presentation.orm.room.viewModels.ContactsViewModelFactory
 import hr.amaurov.niamu.orm_presentation.utils.ContactsAdapter
-import kotlinx.android.synthetic.main.fragment_contacts_list.*
 
 class ContactsListFragment : Fragment() {
 
-    private val contacts: ArrayList<Contact> = ArrayList();
+    private var contactViewModelF:ContactViewModel?= null;
+
+    private var _binding: FragmentContactsListBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts_list, container, false)
+        _binding = FragmentContactsListBinding.inflate(inflater, container, false)
+        contactViewModelF = (activity as HostActivity).contactViewModel
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        addContacts();
-        rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
-        rvContacts.adapter = ContactsAdapter(contacts, this.requireContext()) { item ->
-            (requireActivity() as HostActivity).navigateToProductDetail(item.firstName + " " + item.lastName)
-        };
-    }
-
-    private fun addContacts() {
-        contacts.clear()
-        contacts.add(Contact(firstName = "Anton", lastName = "Maurovic"));
-        contacts.add(Contact(firstName = "Luis Daniel", lastName = "Vasquez Pena"));
-        contacts.add(Contact(firstName = "Andro", lastName = "Zonja"));
-        contacts.add(Contact(firstName = "John", lastName = "Doe"));
-        contacts.add(Contact(firstName = "Jane", lastName = "Doe"));
-        contacts.add(Contact(firstName = "Zdravko", lastName = "Mamic"));
-        contacts.add(Contact(firstName = "Severina", lastName = "Kojic"));
+        contactViewModelF!!.allContacts.observe(this.viewLifecycleOwner, Observer { contacts ->
+            contacts.let {
+                binding.rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
+                binding.rvContacts.adapter = ContactsAdapter(
+                    contacts,
+                    this.requireContext()
+                ) { item ->
+                    (requireActivity() as HostActivity).navigateToProductDetail(item.id!!)
+                };
+            }
+        })
     }
 }

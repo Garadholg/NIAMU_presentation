@@ -9,11 +9,15 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import hr.amaurov.niamu.orm_presentation.R
-import hr.amaurov.niamu.orm_presentation.models.Contact
-import kotlinx.android.synthetic.main.recyclerview_contact_row.view.*
+import hr.amaurov.niamu.orm_presentation.databinding.FragmentContactDetailsBinding
+import hr.amaurov.niamu.orm_presentation.databinding.FragmentContactsListBinding
+import hr.amaurov.niamu.orm_presentation.databinding.RecyclerviewContactRowBinding
+import hr.amaurov.niamu.orm_presentation.orm.room.entities.ContactRoom
 
-class ContactsAdapter(private val items: ArrayList<Contact>, private val context: Context, private val listener: (Contact) -> Unit)
+class ContactsAdapter(private val items: List<ContactRoom>, private val context: Context, private val listener: (ContactRoom) -> Unit)
     : RecyclerView.Adapter<ViewHolder>() {
+    private var _binding: FragmentContactDetailsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_contact_row, parent, false))
@@ -31,6 +35,7 @@ class ContactsAdapter(private val items: ArrayList<Contact>, private val context
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    val tvFullName: TextView = view.tvFullName
-    val ivFavorite: ImageView = view.ivFavorite
+    val binding=RecyclerviewContactRowBinding.bind(view)
+    val tvFullName: TextView = binding.tvFullName
+    val ivFavorite: ImageView = binding.ivFavorite
 }
