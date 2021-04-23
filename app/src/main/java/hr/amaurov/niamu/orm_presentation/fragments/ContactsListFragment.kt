@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_contacts_list.*
 
 class ContactsListFragment : Fragment() {
 
-    private val contacts: ArrayList<Contact> = ArrayList();
+    private var contacts: MutableList<Contact> = ArrayList();
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,21 +27,12 @@ class ContactsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addContacts();
         rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
+        // BUG
         rvContacts.adapter = ContactsAdapter(contacts, this.requireContext()) { item ->
-            (requireActivity() as HostActivity).navigateToProductDetail(item.firstName + " " + item.lastName)
+           (requireActivity() as HostActivity).navigateToProductDetail(item.firstName + " " + item.lastName)
         };
     }
 
-    private fun addContacts() {
-        contacts.clear()
-        contacts.add(Contact(firstName = "Anton", lastName = "Maurovic"));
-        contacts.add(Contact(firstName = "Luis Daniel", lastName = "Vasquez Pena"));
-        contacts.add(Contact(firstName = "Andro", lastName = "Zonja"));
-        contacts.add(Contact(firstName = "John", lastName = "Doe"));
-        contacts.add(Contact(firstName = "Jane", lastName = "Doe"));
-        contacts.add(Contact(firstName = "Zdravko", lastName = "Mamic"));
-        contacts.add(Contact(firstName = "Severina", lastName = "Kojic"));
-    }
+
 }

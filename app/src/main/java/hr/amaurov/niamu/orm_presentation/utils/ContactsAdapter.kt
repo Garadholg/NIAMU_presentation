@@ -1,6 +1,7 @@
 package hr.amaurov.niamu.orm_presentation.utils
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,25 +13,46 @@ import hr.amaurov.niamu.orm_presentation.R
 import hr.amaurov.niamu.orm_presentation.models.Contact
 import kotlinx.android.synthetic.main.recyclerview_contact_row.view.*
 
-class ContactsAdapter(private val items: ArrayList<Contact>, private val context: Context, private val listener: (Contact) -> Unit)
+
+class ContactsAdapter(
+    var dataset: MutableList<Contact>,
+    private val context: Context,
+    private val listener: ContactClickListener
+)
     : RecyclerView.Adapter<ViewHolder>() {
 
+    interface ContactClickListener {
+      fun onContactClick(position: Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_contact_row, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.recyclerview_contact_row,
+                parent,
+                false
+            )
+        )
+    }
+
+    fun setContacts(contacts: MutableList<Contact>) {
+        dataset = contacts
+        Log.e("test", "hey!!!! $contacts")
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.tvFullName?.text = items[position].firstName + " " + items[position].lastName
-        holder?.ivFavorite?.isVisible = items[position].isFavorite!!
-        holder?.itemView.setOnClickListener{ listener(items[position]) }
+        holder.tvFullName.text = dataset[position].firstName + " " + dataset[position].lastName
+        holder.ivFavorite.isVisible = dataset[position].isFavorite!!
+        holder.itemView.setOnClickListener{ listener.onContactClick(position) }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return dataset.size
     }
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tvFullName: TextView = view.tvFullName
     val ivFavorite: ImageView = view.ivFavorite
 }

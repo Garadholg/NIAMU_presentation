@@ -1,4 +1,4 @@
-package hr.amaurov.niamu.orm_presentation.orm.greenDao.models;
+package hr.amaurov.niamu.orm_presentation.models;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
@@ -7,13 +7,12 @@ import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.NotNull;
-import java.util.Date;
 
 @Entity(
         // Flag if the DAO should create the database table (default is true).
         // Set this to false, if you have multiple entities mapping to one table,
         // or the table creation is done outside of greenDAO.
-        createInDb = false,
+        createInDb = true,
 
         // Whether an all properties constructor should be generated.
         // A no-args constructor is always required.
@@ -29,7 +28,7 @@ public class Contact {
     private String firstName;
     private String lastName;
 
-    // BUG: Cannot make it work with java.time.LocalDate (unsupported type error)
+    // TODO: Do it with java.time.LocalDate
     private java.util.Date dateOfBirth;
 
     @Unique
