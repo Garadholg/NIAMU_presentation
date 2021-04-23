@@ -13,17 +13,13 @@ import hr.amaurov.niamu.orm_presentation.R
 import hr.amaurov.niamu.orm_presentation.models.Contact
 import kotlinx.android.synthetic.main.recyclerview_contact_row.view.*
 
-
 class ContactsAdapter(
     var dataset: MutableList<Contact>,
     private val context: Context,
-    private val listener: ContactClickListener
+    private val listener: (Contact) -> Unit
 )
     : RecyclerView.Adapter<ViewHolder>() {
 
-    interface ContactClickListener {
-      fun onContactClick(position: Int)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -42,9 +38,9 @@ class ContactsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvFullName.text = dataset[position].firstName + " " + dataset[position].lastName
+        holder.tvFullName.text = "${dataset[position].firstName} ${dataset[position].lastName}"
         holder.ivFavorite.isVisible = dataset[position].isFavorite!!
-        holder.itemView.setOnClickListener{ listener.onContactClick(position) }
+        holder.itemView.setOnClickListener{ listener(dataset[position]) }
     }
 
     override fun getItemCount(): Int {

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import hr.amaurov.niamu.orm_presentation.R
 import kotlinx.android.synthetic.main.fragment_contact_details.*
 
-private const val CONTACT_KEY = "PRODUCT"
+private const val CONTACT_KEY = "CONTACT"
 
 class ContactDetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
