@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/contactslist_button_margin"
         android:backgroundTint="@color/secondary"
-        android:onClick="addContact"
         android:paddingVertical="@dimen/contactslist_button_paddingvertical"
         android:text="@string/contactslist_button_addcontact"
         android:textColor="@color/white" />

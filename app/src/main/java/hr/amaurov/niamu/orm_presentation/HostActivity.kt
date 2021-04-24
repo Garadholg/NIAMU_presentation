@@ -16,13 +16,12 @@ class HostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_host)
     }
 
-    /**
-     * Load the details view for the given contact's full name: "${firstName} ${lastName}".
-     */
-    fun navigateToContactDetail(contact: String) {
+    fun navigateToContactDetails(contactId: Long?) {
         val fragment = ContactDetailsFragment()
         val args = Bundle().apply {
-            putString(CONTACT_KEY, contact)
+            if (contactId != null) {
+                putLong(CONTACT_KEY, contactId)
+            }
         }
         fragment.arguments = args
 

@@ -14,7 +14,7 @@ import hr.amaurov.niamu.orm_presentation.models.Contact
 import kotlinx.android.synthetic.main.recyclerview_contact_row.view.*
 
 class ContactsAdapter(
-    var dataset: MutableList<Contact>,
+    var dataset: List<Contact>?,
     private val context: Context,
     private val listener: (Contact) -> Unit
 )
@@ -31,20 +31,14 @@ class ContactsAdapter(
         )
     }
 
-    fun setContacts(contacts: MutableList<Contact>) {
-        dataset = contacts
-        Log.e("test", "hey!!!! $contacts")
-        notifyDataSetChanged()
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvFullName.text = "${dataset[position].firstName} ${dataset[position].lastName}"
-        holder.ivFavorite.isVisible = dataset[position].isFavorite!!
-        holder.itemView.setOnClickListener{ listener(dataset[position]) }
+        holder.tvFullName.text = "${dataset?.get(position)?.firstName} ${dataset?.get(position)?.lastName}"
+        holder.ivFavorite.isVisible = dataset?.get(position)?.isFavorite!!
+        holder.itemView.setOnClickListener{ listener(dataset!![position]) }
     }
 
     override fun getItemCount(): Int {
-        return dataset.size
+        return dataset?.size!!
     }
 }
 

@@ -1,5 +1,6 @@
 package hr.amaurov.niamu.orm_presentation.models;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -7,6 +8,8 @@ import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(
         // Flag if the DAO should create the database table (default is true).
@@ -28,8 +31,8 @@ public class Contact {
     private String firstName;
     private String lastName;
 
-    // TODO: Do it with java.time.LocalDate
-    private java.util.Date dateOfBirth;
+    @Convert(converter = DateConverter.class, columnType = Long.class)
+    private java.time.LocalDateTime dateOfBirth;
 
     @Unique
     private String email;
@@ -51,9 +54,10 @@ private transient DaoSession daoSession;
 @Generated(hash = 2046468181)
 private transient ContactDao myDao;
 
-@Generated(hash = 709291633)
-public Contact(Long id, String firstName, String lastName, java.util.Date dateOfBirth,
-        String email, String phoneNumber, long cityId, Boolean isFavorite) {
+@Generated(hash = 715793630)
+public Contact(Long id, String firstName, String lastName,
+        java.time.LocalDateTime dateOfBirth, String email, String phoneNumber,
+        long cityId, Boolean isFavorite) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -92,11 +96,11 @@ public void setLastName(String lastName) {
     this.lastName = lastName;
 }
 
-public java.util.Date getDateOfBirth() {
+public java.time.LocalDateTime getDateOfBirth() {
     return this.dateOfBirth;
 }
 
-public void setDateOfBirth(java.util.Date dateOfBirth) {
+public void setDateOfBirth(java.time.LocalDateTime dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
 }
 

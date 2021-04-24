@@ -10,4 +10,17 @@
     <dimen name="recyclerviewitem_cardcornerradius">10dp</dimen>
     <dimen name="contactslist_button_margin">10dp</dimen>
     <dimen name="contactslist_button_paddingvertical">15dp</dimen>
+    <dimen name="contactdetails_cardview_marginhorizontal">15dp</dimen>
+    <dimen name="contactdetails_cardview_margintop">15dp</dimen>
+    <dimen name="contactdetails_cardview_cornerradius">10dp</dimen>
+    <dimen name="contactdetails_content_paddinghorizontal">10dp</dimen>
+    <dimen name="contactdetails_datalabel_margintop">10dp</dimen>
+    <dimen name="contactdetails_datalabel_textsize">18sp</dimen>
+    <dimen name="contactdetails_spinner_marginbottom">10dp</dimen>
+    <dimen name="contactdetails_deletebutton_marginhorizontal">10dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="contactdetails_edittext_marginbottom">10dp</dimen>
+    <dimen name="contactdetails_buttoncontainer_marginvertical">15dp</dimen>
+    <dimen name="contactdetails_buttoncontainer_paddinghorizontal">10dp</dimen>
+    <dimen name="contactdetails_buttons_paddinghorizontal">10dp</dimen>
 </resources>

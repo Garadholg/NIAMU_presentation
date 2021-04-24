@@ -15,84 +15,122 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="10dp">
+            android:layout_marginHorizontal="@dimen/contactdetails_cardview_marginhorizontal"
+            android:layout_marginTop="@dimen/contactdetails_cardview_margintop"
+            app:cardCornerRadius="@dimen/contactdetails_cardview_cornerradius">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="@dimen/contactdetails_content_paddinghorizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                            android:text="@string/contactdetails_textview_firstname"
+                            android:textSize="@dimen/contactdetails_datalabel_textsize" />
+
+                        <EditText
+                            android:id="@+id/etDetailsFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/contactdetails_edittext_marginbottom"
+                            tools:text="Contact name" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/ivStar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_favorite_empty" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Name"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                    android:text="@string/contactdetails_textview_lastname"
+                    android:textSize="@dimen/contactdetails_datalabel_textsize" />
 
                 <EditText
-                    android:id="@+id/etDetailsFullName"
+                    android:id="@+id/etDetailsLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    tools:text="Contact name" />
+                    android:layout_marginBottom="@dimen/contactdetails_edittext_marginbottom"
+                    tools:text="Contact surname" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Date of Birth"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                    android:text="@string/contactdetails_textview_dateofbirth"
+                    android:textSize="@dimen/contactdetails_datalabel_textsize" />
 
                 <EditText
-                    android:id="@+id/etDateOfBirth"
+                    android:id="@+id/etDetailsDateOfBirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/contactdetails_edittext_marginbottom"
                     tools:text="19.4.2021" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Email"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                    android:text="@string/contactdetails_textview_email"
+                    android:textSize="@dimen/contactdetails_datalabel_textsize" />
 
                 <EditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/etDetailsEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/contactdetails_edittext_marginbottom"
                     tools:text="example@mail.com" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Phone number"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                    android:text="@string/contactdetails_textview_phonenumber"
+                    android:textSize="@dimen/contactdetails_datalabel_textsize" />
 
                 <EditText
-                    android:id="@+id/etPhoneNumber"
+                    android:id="@+id/etDetailsPhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/contactdetails_edittext_marginbottom"
                     tools:text="0911111111" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="City"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="@dimen/contactdetails_datalabel_margintop"
+                    android:text="@string/contactdetails_textview_city"
+                    android:textSize="@dimen/contactdetails_datalabel_textsize" />
 
                 <Spinner
                     android:id="@+id/spCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="@dimen/contactdetails_spinner_marginbottom" />
 
             </LinearLayout>
 
@@ -102,30 +140,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginVertical="15dp"
-            android:paddingHorizontal="10dp">
+            android:layout_marginVertical="@dimen/contactdetails_buttoncontainer_marginvertical"
+            android:paddingHorizontal="@dimen/contactdetails_buttoncontainer_paddinghorizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="@dimen/contactdetails_buttons_paddinghorizontal">
 
                 <Button
                     android:id="@+id/btnSave"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Save changes"
                     android:backgroundTint="@color/secondary"
                     android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btnCancel"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancel" />
+                    android:text="@string/contactdetails_button_cancel" />
 
             </LinearLayout>
 
@@ -133,8 +170,8 @@
                 android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:text="Delete"
+                android:layout_marginHorizontal="@dimen/contactdetails_deletebutton_marginhorizontal"
+                android:text="@string/contactdetails_button_deletecontact"
                 android:backgroundTint="@android:color/holo_red_light"/>
 
         </LinearLayout>
