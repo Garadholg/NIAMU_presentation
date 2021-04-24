@@ -1,20 +1,23 @@
 package hr.amaurov.niamu.orm_presentation.fragments
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import hr.amaurov.niamu.orm_presentation.R
 import hr.amaurov.niamu.orm_presentation.dao.implementations.ORMService
 import hr.amaurov.niamu.orm_presentation.models.Contact
 import hr.amaurov.niamu.orm_presentation.utils.SpinnerCity
 import kotlinx.android.synthetic.main.fragment_contact_details.*
+import java.lang.RuntimeException
+import java.time.DateTimeException
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.collections.ArrayList
 
 private const val CONTACT_KEY = "CONTACT"
 
@@ -44,10 +47,15 @@ class ContactDetailsFragment : Fragment() {
 
         if (contactId != 0L) {
             contact = contactId?.let { ORMService.getContactDetails(it) };
-
+            try {
+                val dateOfBirth: String =
+                    contact?.dateOfBirth?.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"))
+                        .toString()
+                etDetailsDateOfBirth.setText(dateOfBirth)
+            } catch (e: Exception) {
+            }
             etDetailsFirstName.setText(contact?.firstName)
             etDetailsLastName.setText(contact?.lastName)
-            etDetailsDateOfBirth.setText(contact?.dateOfBirth?.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")))
             etDetailsEmail.setText(contact?.email)
             etDetailsPhoneNumber.setText(contact?.phoneNumber)
 
@@ -97,41 +105,85 @@ class ContactDetailsFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-        ivStar.setOnClickListener {
-            if (isStarFull) {
-                ivStar.setImageResource(R.drawable.ic_favorite_empty)
-            } else {
-                ivStar.setImageResource(R.drawable.ic_favorite_full)
-            }
+        // Enable / Disable btnSave
+        fun enableSaveButton(hasChanged: Boolean) {
+            btnSave.isEnabled = hasChanged
+            btnSave.alpha = if (hasChanged) 1F else 0.2F
+        }
 
-            isStarFull = !isStarFull
+        fun setOnKeyListenerContact(editText: EditText, value: String) {
+            editText.setOnKeyListener(View.OnKeyListener { _, _, keyEvent ->
+                when {
+                    (keyEvent.action == KeyEvent.ACTION_UP) -> {
+                        enableSaveButton(editText.text.toString() != value)
+                    }
+                }
+                false
+            })
+        }
+        /*
+        setOnKeyListenerContact(etDetailsFirstName, contact?.firstName.toString())
+        setOnKeyListenerContact(etDetailsLastName, contact?.lastName.toString())
+        setOnKeyListenerContact(etDetailsDateOfBirth, contact?.dateOfBirth.toString())
+        setOnKeyListenerContact(etDetailsEmail, contact?.email.toString())
+        setOnKeyListenerContact(etDetailsPhoneNumber, contact?.phoneNumber.toString())
+        enableSaveButton(spCity.selectedItemId != contact?.cityId)
+        */
+
+        ivStar.setOnClickListener {
+            ivStar.setImageResource(if (isStarFull) R.drawable.ic_favorite_full else R.drawable.ic_favorite_empty)
         }
     }
 
     private fun addUpdateContact() {
         if (contact == null) {
             contact = Contact()
-            fillContactInfo()
-            ORMService.createContact(contact!!)
+            if (fillContactInfo()) {
+                ORMService.createContact(contact!!)
+                activity?.onBackPressed()
+            }
         } else {
-            fillContactInfo()
-            ORMService.updateContact(contact!!)
+            if (fillContactInfo()) {
+                ORMService.updateContact(contact!!)
+                activity?.onBackPressed()
+            }
         }
-
-        activity?.onBackPressed()
     }
 
-    private fun fillContactInfo() {
+    /**
+     * Return false if an exception occurs.
+     */
+    private fun fillContactInfo(): Boolean {
         contact?.firstName = etDetailsFirstName.text.toString()
         contact?.lastName = etDetailsLastName.text.toString()
-        contact?.dateOfBirth = LocalDate.parse(
-            etDetailsDateOfBirth.text.toString(),
-            DateTimeFormatter.ofPattern("MM-dd-yyyy")
-        )
-        contact?.email = etDetailsEmail.text.toString()
-        contact?.phoneNumber = etDetailsPhoneNumber.text.toString()
+        try {
+            contact?.dateOfBirth = LocalDate.parse(
+                etDetailsDateOfBirth.text.toString(),
+                DateTimeFormatter.ofPattern("MM-dd-yyyy")
+            )
+
+            val email = etDetailsEmail.text.toString()
+            if (email.isEmpty()) throw RuntimeException("email")
+            contact?.email = email
+
+            val phoneNumber = etDetailsPhoneNumber.text.toString()
+            if (phoneNumber.isEmpty()) throw RuntimeException("phone number")
+            contact?.phoneNumber = phoneNumber
+        } catch (e: DateTimeException) {
+            Toast.makeText(this.context, "Please enter a valid date", Toast.LENGTH_SHORT).show()
+            return false
+        } catch (re: RuntimeException) {
+            Toast.makeText(
+                this.context,
+                "Please enter a valid ${re.localizedMessage}",
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
+        }
+
         contact?.isFavorite = isStarFull
         contact?.cityId = spCity.selectedItemId + 1
+        return true
     }
 
 }
