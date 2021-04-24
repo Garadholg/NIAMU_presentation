@@ -24,8 +24,8 @@ class CustomOpenHelper(context: Context?, name: String?) :
                     ContactDao.Properties.PhoneNumber.columnName.toString() + ", " +
                     ContactDao.Properties.CityId.columnName.toString() + ", " +
                     ContactDao.Properties.IsFavorite.columnName.toString() +
-                    ") VALUES (1, 'John', 'Doe', null, 'john.doe@mail.com', '+385951234567', 1, 1), " +
-                    "(2, 'Jane', 'Doe', null, 'jane.doe@mail.com', null, 1, 0)"
+                    ") VALUES (1, 'John', 'Doe', 1, 'john.doe@mail.com', '+385951234567', 1, 1), " +
+                    "(2, 'Jane', 'Doe', 0, 'jane.doe@mail.com', null, 1, 0)"
         )
 
         db.execSQL(

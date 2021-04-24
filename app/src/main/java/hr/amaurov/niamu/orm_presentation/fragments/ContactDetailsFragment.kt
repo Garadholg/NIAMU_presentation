@@ -11,18 +11,22 @@ import hr.amaurov.niamu.orm_presentation.dao.implementations.ORMService
 import hr.amaurov.niamu.orm_presentation.models.Contact
 import hr.amaurov.niamu.orm_presentation.utils.SpinnerCity
 import kotlinx.android.synthetic.main.fragment_contact_details.*
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 
 private const val CONTACT_KEY = "CONTACT"
 
 class ContactDetailsFragment : Fragment() {
 
-    private var contact : Contact? = null
-    private var isStarFull : Boolean = false
+    private var contact: Contact? = null
+    private var isStarFull: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contact_details, container, false)
     }
@@ -43,7 +47,7 @@ class ContactDetailsFragment : Fragment() {
 
             etDetailsFirstName.setText(contact?.firstName)
             etDetailsLastName.setText(contact?.lastName)
-            etDetailsDateOfBirth.setText(contact?.dateOfBirth?.toString())
+            etDetailsDateOfBirth.setText(contact?.dateOfBirth?.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")))
             etDetailsEmail.setText(contact?.email)
             etDetailsPhoneNumber.setText(contact?.phoneNumber)
 
@@ -69,7 +73,11 @@ class ContactDetailsFragment : Fragment() {
             spinnerItems.add(SpinnerCity(it.id, it.name, it.country.name))
         }
 
-        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            spinnerItems
+        )
         spCity.adapter = spinnerAdapter
 
         if (contact != null) {
@@ -116,7 +124,10 @@ class ContactDetailsFragment : Fragment() {
     private fun fillContactInfo() {
         contact?.firstName = etDetailsFirstName.text.toString()
         contact?.lastName = etDetailsLastName.text.toString()
-        contact?.dateOfBirth = LocalDateTime.now()
+        contact?.dateOfBirth = LocalDate.parse(
+            etDetailsDateOfBirth.text.toString(),
+            DateTimeFormatter.ofPattern("MM-dd-yyyy")
+        )
         contact?.email = etDetailsEmail.text.toString()
         contact?.phoneNumber = etDetailsPhoneNumber.text.toString()
         contact?.isFavorite = isStarFull

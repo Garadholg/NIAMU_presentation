@@ -11,7 +11,7 @@
     <string name="contactdetails_button_deletecontact">Delete contact</string>
     <string name="contactdetails_textview_firstname">First Name</string>
     <string name="contactdetails_textview_lastname">Last Name</string>
-    <string name="contactdetails_textview_dateofbirth">Date of Birth</string>
+    <string name="contactdetails_textview_dateofbirth">Date of Birth (MM-dd-yyyy)</string>
     <string name="contactdetails_textview_email">Email</string>
     <string name="contactdetails_textview_phonenumber">Phone number</string>
     <string name="contactdetails_textview_city">City</string>

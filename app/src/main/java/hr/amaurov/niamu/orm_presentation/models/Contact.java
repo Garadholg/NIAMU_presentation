@@ -32,7 +32,7 @@ public class Contact {
     private String lastName;
 
     @Convert(converter = DateConverter.class, columnType = Long.class)
-    private java.time.LocalDateTime dateOfBirth;
+    private java.time.LocalDate dateOfBirth;
 
     @Unique
     private String email;
@@ -54,10 +54,10 @@ private transient DaoSession daoSession;
 @Generated(hash = 2046468181)
 private transient ContactDao myDao;
 
-@Generated(hash = 715793630)
+@Generated(hash = 1448249221)
 public Contact(Long id, String firstName, String lastName,
-        java.time.LocalDateTime dateOfBirth, String email, String phoneNumber,
-        long cityId, Boolean isFavorite) {
+        java.time.LocalDate dateOfBirth, String email, String phoneNumber, long cityId,
+        Boolean isFavorite) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -96,11 +96,11 @@ public void setLastName(String lastName) {
     this.lastName = lastName;
 }
 
-public java.time.LocalDateTime getDateOfBirth() {
+public java.time.LocalDate getDateOfBirth() {
     return this.dateOfBirth;
 }
 
-public void setDateOfBirth(java.time.LocalDateTime dateOfBirth) {
+public void setDateOfBirth(java.time.LocalDate dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
 }
 

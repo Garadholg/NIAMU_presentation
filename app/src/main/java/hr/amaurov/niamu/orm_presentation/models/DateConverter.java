@@ -3,17 +3,18 @@ package hr.amaurov.niamu.orm_presentation.models;
 import org.greenrobot.greendao.converter.PropertyConverter;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class DateConverter implements PropertyConverter<LocalDateTime, Long> {
+public class DateConverter implements PropertyConverter<LocalDate, Long> {
     @Override
-    public LocalDateTime convertToEntityProperty(Long databaseValue) {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(databaseValue), ZoneOffset.UTC);
+    public LocalDate convertToEntityProperty(Long databaseValue) {
+        return LocalDate.ofEpochDay(databaseValue);
     }
 
     @Override
-    public Long convertToDatabaseValue(LocalDateTime entityProperty) {
-        return entityProperty.atZone(ZoneOffset.UTC).toInstant().toEpochMilli();
+    public Long convertToDatabaseValue(LocalDate entityProperty) {
+        return entityProperty.toEpochDay();
     }
 }

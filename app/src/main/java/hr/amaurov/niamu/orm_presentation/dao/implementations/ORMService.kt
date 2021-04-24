@@ -30,7 +30,7 @@ object ORMService : IORMService {
 
     override fun deleteContact(id: Long) {
         val contact = contactDao!!.queryBuilder().where(ContactDao.Properties.Id.eq(id)).build().unique()
-        contactDao?.delete(contact)
+        contactDao.delete(contact)
     }
 
     override fun getAllCities(): List<City>? {
