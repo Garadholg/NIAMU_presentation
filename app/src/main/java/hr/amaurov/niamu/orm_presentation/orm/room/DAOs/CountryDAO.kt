@@ -9,7 +9,7 @@ import hr.amaurov.niamu.orm_presentation.orm.room.entities.CountryRoom
 
 @Dao
 interface CountryDAO {
-    @Query("SELECT * FROM countries WHERE id=:id")
+    @Query("SELECT * FROM countries WHERE countryID=:id")
     fun getCityById(id: Long): CountryRoom
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

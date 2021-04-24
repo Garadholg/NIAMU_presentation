@@ -9,26 +9,26 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "contacts",foreignKeys = arrayOf(
     ForeignKey(entity = CityRoom::class,
-    parentColumns = arrayOf("id"),
+    parentColumns = arrayOf("cityID"),
     childColumns = arrayOf("cityId"),
     onDelete = ForeignKey.CASCADE)
 ))
 data class ContactRoom (
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
-    var id: Long? = null,
-    @ColumnInfo(name = "firstName")
+        @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="contactID")
+    var contactID: Long? = null,
+        @ColumnInfo(name = "firstName")
     var firstName: String? = null,
-    @ColumnInfo(name = "lastName")
+        @ColumnInfo(name = "lastName")
     var lastName: String? = null,
-    @ColumnInfo(name = "dateOfBirth")
+        @ColumnInfo(name = "dateOfBirth")
     var dateOfBirth: LocalDateTime? = null,
-    @ColumnInfo(name = "email")
+        @ColumnInfo(name = "email")
     var email: String? = null,
-    @ColumnInfo(name = "phoneNumber")
+        @ColumnInfo(name = "phoneNumber")
     var phoneNumber: String? = null,
-    @ColumnInfo(name = "isFavorite")
+        @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean? = false,
-    @ColumnInfo(name = "cityId")
+        @ColumnInfo(name = "cityId")
     var cityId: Long? = null
 )

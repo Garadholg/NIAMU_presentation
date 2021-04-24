@@ -7,12 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDAO {
-    @WorkerThread
     @Query("SELECT * FROM contacts")
     fun getAllContacts(): Flow<List<ContactRoom>>
 
-    @WorkerThread
-    @Query("SELECT * FROM contacts WHERE id=:id")
+    @Query("SELECT * FROM contacts WHERE contactID=:id")
     fun getContactDetails(id: Long): ContactRoom
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -21,7 +19,7 @@ interface ContactDAO {
     @Update
     suspend fun updateContact(contact: ContactRoom)
 
-    @Query("DELETE FROM contacts where id=:contactId")
+    @Query("DELETE FROM contacts where contactID=:contactId")
     suspend fun deleteContact(contactId: Long)
 
     @Query("DELETE FROM contacts")

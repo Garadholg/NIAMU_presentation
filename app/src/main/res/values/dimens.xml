@@ -10,4 +10,5 @@
     <dimen name="recyclerviewitem_cardcornerradius">10dp</dimen>
     <dimen name="contactslist_button_margin">10dp</dimen>
     <dimen name="contactslist_button_paddingvertical">15dp</dimen>
+    <dimen name="spinner_item_padding">4dp</dimen>
 </resources>

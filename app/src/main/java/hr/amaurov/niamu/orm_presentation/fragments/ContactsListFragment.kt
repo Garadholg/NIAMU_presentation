@@ -40,14 +40,28 @@ class ContactsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
+    private fun init() {
+        setUpRecycleView()
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+        binding.btnAddContact.setOnClickListener{item ->(requireActivity() as HostActivity).navigateToProductDetail(0)}
+    }
+
+    private fun setUpRecycleView() {
+        //Get all contacts
         contactViewModelF!!.allContacts.observe(this.viewLifecycleOwner, Observer { contacts ->
             contacts.let {
                 binding.rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
                 binding.rvContacts.adapter = ContactsAdapter(
-                    contacts,
-                    this.requireContext()
+                        contacts,
+                        this.requireContext()
                 ) { item ->
-                    (requireActivity() as HostActivity).navigateToProductDetail(item.id!!)
+                    (requireActivity() as HostActivity).navigateToProductDetail(item.contactID!!)
                 };
             }
         })

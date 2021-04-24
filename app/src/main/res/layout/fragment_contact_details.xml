@@ -29,15 +29,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Name"
+                    android:text="First Name"
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/etDetailsFullName"
+                    android:id="@+id/etDetailsFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    tools:text="Contact name" />
+                    tools:text="First name" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Last Name"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etDetailsLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    tools:text="Last name" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -92,7 +105,16 @@
                     android:id="@+id/spCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_marginBottom="10dp" />
+
+                <CheckBox
+                    android:id="@+id/cbFavorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18sp"
+                    android:text="Favorite"/>
 
             </LinearLayout>
 
@@ -117,6 +139,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Save changes"
+                    android:backgroundTint="@color/secondary"
+                    android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add Contact"
+                    android:visibility="gone"
+
                     android:backgroundTint="@color/secondary"
                     android:textColor="@color/white"/>
 

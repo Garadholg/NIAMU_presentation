@@ -11,7 +11,7 @@ interface CityDAO {
     @Query("SELECT * FROM cities")
     fun getAllCities(): List<CityRoom>
 
-    @Query("SELECT * FROM cities WHERE id=:id")
+    @Query("SELECT * FROM cities WHERE cityID=:id")
     fun getCityById(id: Long): CityRoom
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

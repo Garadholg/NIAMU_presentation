@@ -16,8 +16,6 @@ import hr.amaurov.niamu.orm_presentation.orm.room.entities.ContactRoom
 
 class ContactsAdapter(private val items: List<ContactRoom>, private val context: Context, private val listener: (ContactRoom) -> Unit)
     : RecyclerView.Adapter<ViewHolder>() {
-    private var _binding: FragmentContactDetailsBinding? = null
-    private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_contact_row, parent, false))
