@@ -105,31 +105,6 @@ class ContactDetailsFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-        // Enable / Disable btnSave
-        fun enableSaveButton(hasChanged: Boolean) {
-            btnSave.isEnabled = hasChanged
-            btnSave.alpha = if (hasChanged) 1F else 0.2F
-        }
-
-        fun setOnKeyListenerContact(editText: EditText, value: String) {
-            editText.setOnKeyListener(View.OnKeyListener { _, _, keyEvent ->
-                when {
-                    (keyEvent.action == KeyEvent.ACTION_UP) -> {
-                        enableSaveButton(editText.text.toString() != value)
-                    }
-                }
-                false
-            })
-        }
-        /*
-        setOnKeyListenerContact(etDetailsFirstName, contact?.firstName.toString())
-        setOnKeyListenerContact(etDetailsLastName, contact?.lastName.toString())
-        setOnKeyListenerContact(etDetailsDateOfBirth, contact?.dateOfBirth.toString())
-        setOnKeyListenerContact(etDetailsEmail, contact?.email.toString())
-        setOnKeyListenerContact(etDetailsPhoneNumber, contact?.phoneNumber.toString())
-        enableSaveButton(spCity.selectedItemId != contact?.cityId)
-        */
-
         ivStar.setOnClickListener {
             ivStar.setImageResource(if (isStarFull) R.drawable.ic_favorite_full else R.drawable.ic_favorite_empty)
         }
