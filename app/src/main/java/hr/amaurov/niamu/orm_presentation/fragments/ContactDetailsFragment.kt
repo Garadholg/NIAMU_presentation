@@ -12,8 +12,6 @@ import hr.amaurov.niamu.orm_presentation.models.Contact
 import hr.amaurov.niamu.orm_presentation.utils.SpinnerCity
 import kotlinx.android.synthetic.main.fragment_contact_details.*
 import java.time.LocalDateTime
-import java.time.LocalDateTime.now
-import java.time.ZoneOffset
 import kotlin.collections.ArrayList
 
 private const val CONTACT_KEY = "CONTACT"
@@ -118,7 +116,7 @@ class ContactDetailsFragment : Fragment() {
     private fun fillContactInfo() {
         contact?.firstName = etDetailsFirstName.text.toString()
         contact?.lastName = etDetailsLastName.text.toString()
-        contact?.dateOfBirth = LocalDateTime.of(1990, 1, 1, 0, 0)
+        contact?.dateOfBirth = LocalDateTime.now()
         contact?.email = etDetailsEmail.text.toString()
         contact?.phoneNumber = etDetailsPhoneNumber.text.toString()
         contact?.isFavorite = isStarFull
