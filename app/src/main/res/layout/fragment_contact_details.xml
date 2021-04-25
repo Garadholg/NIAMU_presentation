@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="First Name"
+                    android:text="@string/str_first_name"
                     android:textSize="18sp" />
 
                 <EditText
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Last Name"
+                    android:text="@string/str_last_name"
                     android:textSize="18sp" />
 
                 <EditText
@@ -56,21 +56,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Date of Birth"
+                    android:text="@string/str_date_of_birth"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/etDateOfBirth"
+                <DatePicker
+                    android:id="@+id/dtpDateofBirth"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    tools:text="19.4.2021" />
+                    android:layout_height="100dp"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Email"
+                    android:text="@string/str_email"
                     android:textSize="18sp" />
 
                 <EditText
@@ -78,13 +78,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    tools:text="example@mail.com" />
+                    tools:text="example@mail.com"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Phone number"
+                    android:text="@string/str_phone_number"
                     android:textSize="18sp" />
 
                 <EditText
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="City"
+                    android:text="@string/str_city"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textSize="18sp"
-                    android:text="Favorite"/>
+                    android:text="@string/str_favorite"/>
 
             </LinearLayout>
 
@@ -138,7 +138,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Save changes"
+                    android:text="@string/str_save_changes"
                     android:backgroundTint="@color/secondary"
                     android:textColor="@color/white"/>
                 <Button
@@ -146,7 +146,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Add Contact"
+                    android:text="@string/str_add_contact"
                     android:visibility="gone"
 
                     android:backgroundTint="@color/secondary"
@@ -157,7 +157,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancel" />
+                    android:text="@string/str_cancel" />
 
             </LinearLayout>
 
@@ -166,10 +166,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Delete"
+                android:text="@string/str_delete"
                 android:backgroundTint="@android:color/holo_red_light"/>
 
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

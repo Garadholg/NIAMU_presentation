@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.transition.Visibility
 import hr.amaurov.niamu.orm_presentation.HostActivity
@@ -14,6 +15,7 @@ import hr.amaurov.niamu.orm_presentation.orm.room.entities.CityRoom
 import hr.amaurov.niamu.orm_presentation.orm.room.entities.ContactRoom
 import hr.amaurov.niamu.orm_presentation.orm.room.viewModels.ContactViewModel
 import hr.amaurov.niamu.orm_presentation.utils.CityAdapter
+import hr.amaurov.niamu.orm_presentation.utils.showToast
 import java.time.LocalDate
 
 private const val CONTACT_KEY = "CONTACT_ID"
@@ -47,6 +49,8 @@ class ContactDetailsFragment : Fragment() {
             binding.btnDelete.visibility=View.GONE
             binding.btnSave.visibility=View.GONE
             binding.btnAdd.visibility=View.VISIBLE
+            var date: LocalDate = LocalDate.now()
+            binding.dtpDateofBirth.init(date.year,date.monthValue,date.dayOfMonth,null)
         }
         else {
             getDetailsAndFillViews(contactId)
@@ -72,21 +76,36 @@ class ContactDetailsFragment : Fragment() {
         //Editing contact
         binding.btnSave.setOnClickListener{
             fromUiToObject()
-            contactViewModelF!!.updateContact(contactDetails!!)
-            requireActivity().onBackPressed()
+            try {
+                contactViewModelF!!.updateContact(contactDetails!!)
+                requireActivity().showToast("Contact edited", Toast.LENGTH_SHORT)
+                requireActivity().onBackPressed()
+            } catch (e: Exception) {
+                requireActivity().showToast("Error editing contact: "+e.message, Toast.LENGTH_LONG)
+            }
         }
 
         //Deleting contact
         binding.btnDelete.setOnClickListener{
-            contactViewModelF!!.deleteContact(contactDetails!!.contactID!!)
-            requireActivity().onBackPressed()
+            try {
+                contactViewModelF!!.deleteContact(contactDetails!!.contactID!!)
+                requireActivity().showToast("Contact deleted", Toast.LENGTH_SHORT)
+                requireActivity().onBackPressed()
+            } catch (e: Exception) {
+                requireActivity().showToast("Error deleting contact: "+e.message, Toast.LENGTH_LONG)
+            }
         }
 
         //Creating contact
         binding.btnAdd.setOnClickListener{
             fromUiToObject()
-            contactViewModelF!!.createContact(contactDetails!!)
-            requireActivity().onBackPressed()
+            try {
+                contactViewModelF!!.createContact(contactDetails!!)
+                requireActivity().showToast("Contact added", Toast.LENGTH_SHORT)
+                requireActivity().onBackPressed()
+            } catch (e: Exception) {
+                requireActivity().showToast("Error creating contact: "+e.message, Toast.LENGTH_LONG)
+            }
         }
     }
 
@@ -97,13 +116,18 @@ class ContactDetailsFragment : Fragment() {
 
     private fun getDetails(contactId: Long) {
         //Get contact details
-        contactDetails=contactViewModelF!!.getContactDetails(contactId)
+        try {
+            contactDetails = contactViewModelF!!.getContactDetails(contactId)
+        } catch (e: Exception) {
+            requireActivity().showToast("Error getting contact details: "+e.message, Toast.LENGTH_LONG)
+        }
     }
 
     private fun fillUpViews() {
         binding.etDetailsFirstName.setText(contactDetails!!.firstName)
         binding.etDetailsLastName.setText(contactDetails!!.lastName)
-        binding.etDateOfBirth.setText(contactDetails!!.dateOfBirth!!.toLocalDate().toString())
+        var date:LocalDate = contactDetails!!.dateOfBirth!!.toLocalDate()
+        binding.dtpDateofBirth.init(date.year,date.monthValue-1,date.dayOfMonth,null)
         binding.etEmail.setText(contactDetails!!.email)
         binding.etPhoneNumber.setText(contactDetails!!.phoneNumber)
         if(contactDetails!!.isFavorite!!)
@@ -121,7 +145,7 @@ class ContactDetailsFragment : Fragment() {
             contactDetails= ContactRoom()
         contactDetails!!.firstName=binding.etDetailsFirstName.text.toString()
         contactDetails!!.lastName=binding.etDetailsLastName.text.toString()
-        contactDetails!!.dateOfBirth= (LocalDate.parse(binding.etDateOfBirth.text.toString())).atStartOfDay()
+        contactDetails!!.dateOfBirth= (LocalDate.of(binding.dtpDateofBirth.year,binding.dtpDateofBirth.month,binding.dtpDateofBirth.dayOfMonth)).atStartOfDay()
         contactDetails!!.email=binding.etEmail.text.toString()
         contactDetails!!.phoneNumber=binding.etPhoneNumber.text.toString()
         contactDetails!!.isFavorite=binding.cbFavorite.isChecked

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,8 @@ import hr.amaurov.niamu.orm_presentation.orm.room.entities.ContactRoom
 import hr.amaurov.niamu.orm_presentation.orm.room.viewModels.ContactViewModel
 import hr.amaurov.niamu.orm_presentation.orm.room.viewModels.ContactsViewModelFactory
 import hr.amaurov.niamu.orm_presentation.utils.ContactsAdapter
+import hr.amaurov.niamu.orm_presentation.utils.showToast
+import java.lang.Exception
 
 class ContactsListFragment : Fragment() {
 
@@ -54,16 +57,20 @@ class ContactsListFragment : Fragment() {
 
     private fun setUpRecycleView() {
         //Get all contacts
-        contactViewModelF!!.allContacts.observe(this.viewLifecycleOwner, Observer { contacts ->
-            contacts.let {
-                binding.rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
-                binding.rvContacts.adapter = ContactsAdapter(
-                        contacts,
-                        this.requireContext()
-                ) { item ->
-                    (requireActivity() as HostActivity).navigateToProductDetail(item.contactID!!)
-                };
-            }
-        })
+        try {
+            contactViewModelF!!.allContacts.observe(this.viewLifecycleOwner, Observer { contacts ->
+                contacts.let {
+                    binding.rvContacts.layoutManager = LinearLayoutManager(this.requireContext())
+                    binding.rvContacts.adapter = ContactsAdapter(
+                            contacts,
+                            this.requireContext()
+                    ) { item ->
+                        (requireActivity() as HostActivity).navigateToProductDetail(item.contactID!!)
+                    };
+                }
+            })
+        } catch (e: Exception) {
+            requireActivity().showToast("Error getting contacts: "+e.message, Toast.LENGTH_LONG)
+        }
     }
 }
